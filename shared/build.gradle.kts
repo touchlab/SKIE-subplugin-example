@@ -9,6 +9,10 @@ plugins {
     alias(libs.plugins.skie)
 }
 
+dependencies {
+    skieSubPlugin(projects.exampleSkieSubplugin)
+}
+
 android {
     namespace = "co.touchlab.kampkit"
     compileSdk = libs.versions.compileSdk.get().toInt()
@@ -72,6 +76,8 @@ kotlin {
             implementation(libs.kotlinx.dateTime)
             implementation(libs.touchlab.skie.annotations)
             api(libs.touchlab.kermit)
+
+            implementation(projects.exampleSkieSubpluginApi)
         }
         commonTest.dependencies {
             implementation(libs.bundles.shared.commonTest)

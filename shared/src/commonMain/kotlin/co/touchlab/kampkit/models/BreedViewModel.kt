@@ -1,5 +1,6 @@
 package co.touchlab.kampkit.models
 
+import co.touchlab.example.Identifiable
 import co.touchlab.kampkit.db.Breed
 import co.touchlab.kermit.Logger
 import co.touchlab.skie.configuration.annotations.DefaultArgumentInterop
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 
+@Identifiable
 class BreedViewModel(
     private val breedRepository: BreedRepository,
     private val log: Logger

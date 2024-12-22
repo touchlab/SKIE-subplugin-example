@@ -32,5 +32,5 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version("0.8.0")
 }
 
-include(":app", ":shared")
+include(":app", ":shared", ":example-skie-subplugin-api", ":example-skie-subplugin")
 rootProject.name = "KaMPKit"
