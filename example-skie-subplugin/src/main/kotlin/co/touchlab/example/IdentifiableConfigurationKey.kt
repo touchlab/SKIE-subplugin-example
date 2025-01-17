@@ -5,7 +5,8 @@ import co.touchlab.skie.configuration.ConfigurationScope
 import co.touchlab.skie.configuration.ConfigurationTarget
 import co.touchlab.skie.configuration.findAnnotation
 
-object IdentifiableConfigurationKey: ConfigurationKey<IdentifiableConfig?>, ConfigurationScope.Class {
+object IdentifiableConfigurationKey :
+    ConfigurationKey<IdentifiableConfig?>, ConfigurationScope.Class {
     override fun deserialize(value: String?): IdentifiableConfig? {
         return when (value) {
             null -> null

@@ -5,9 +5,9 @@ import co.touchlab.skie.phases.InitPhase
 import co.touchlab.skie.phases.swift.ConvertSirIrFilesToSourceFilesPhase
 import co.touchlab.skie.spi.SkiePluginRegistrar
 
-class ExampleSkieSubplugin: SkiePluginRegistrar {
+class ExampleSkieSubplugin : SkiePluginRegistrar {
     override val customConfigurationKeys: Set<ConfigurationKey<*>> = setOf(
-        IdentifiableConfigurationKey,
+        IdentifiableConfigurationKey
     )
 
     override fun register(initPhaseContext: InitPhase.Context) {

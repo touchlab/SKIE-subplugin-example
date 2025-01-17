@@ -7,7 +7,7 @@ import co.touchlab.skie.sir.element.SirExtension
 import co.touchlab.skie.sir.element.SirGetter
 import co.touchlab.skie.sir.element.SirProperty
 
-object GenerateIdentifiableConformancesPhase: SirPhase {
+object GenerateIdentifiableConformancesPhase : SirPhase {
     context(SirPhase.Context)
     override suspend fun execute() {
         val identifiableProtocol = SirClass(
@@ -18,11 +18,15 @@ object GenerateIdentifiableConformancesPhase: SirPhase {
         )
 
         kirProvider.kotlinClasses.forEach { kirClass ->
-            val identifiableConfig = kirClass.configuration[IdentifiableConfigurationKey] ?: return@forEach
+            val identifiableConfig = kirClass.configuration[IdentifiableConfigurationKey]
+                ?: return@forEach
             val identityProperty = identifiableConfig.propertyName?.let { propertyName ->
                 kirClass.callableDeclarations
                     .filterIsInstance<KirProperty>()
-                    .singleOrNull { it.kotlinName == propertyName } ?: error("Property $propertyName not found in class ${kirClass.kotlinFqName}!")
+                    .singleOrNull {
+                        it.kotlinName == propertyName
+                    }
+                    ?: error("Property $propertyName not found in class ${kirClass.kotlinFqName}!")
             }
             val sirClass = kirClass.primarySirClass
             val sirIdentityProperty = identityProperty?.primarySirProperty
@@ -31,13 +35,13 @@ object GenerateIdentifiableConformancesPhase: SirPhase {
                 SirExtension(
                     classDeclaration = sirClass,
                     superTypes = listOf(
-                        identifiableProtocol.defaultType,
-                    ),
+                        identifiableProtocol.defaultType
+                    )
                 ).apply {
                     if (sirIdentityProperty != null) {
                         SirProperty(
                             identifier = "id",
-                            type = sirIdentityProperty.type,
+                            type = sirIdentityProperty.type
                         ).apply {
                             SirGetter().apply {
                                 bodyBuilder.add {
